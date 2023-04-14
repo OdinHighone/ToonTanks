@@ -40,4 +40,9 @@ private:
 
 	UPROPERTY(EditAnywhere,meta=(AllowPrivateAccess="true"))
 	float rotateRate = 100.0f;
+
+protected:
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AProjectile> projectile;
 };
