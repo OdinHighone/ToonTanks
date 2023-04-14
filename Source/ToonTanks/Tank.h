@@ -16,6 +16,9 @@ class TOONTANKS_API ATank : public ABasePawn
 
 protected:
 	ATank();
+
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaSeconds) override;
 	
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -29,6 +32,8 @@ private:
 
 	UPROPERTY(EditAnywhere,meta=(AllowPrivateAccess = "true"))
 	float turnRate = 0;
+
+	class APlayerController* playerControllerReference = nullptr;
 
 protected:
 	void Move(float Value);

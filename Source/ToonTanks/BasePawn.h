@@ -19,10 +19,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(VisibleAnywhere)
+	class UStaticMeshComponent* turretMesh;
+
+	void rotateTurret(FVector destinationPoint);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void fire();
 private:
 	UPROPERTY(VisibleAnywhere)
 	class UCapsuleComponent* capsuleComp;
@@ -31,9 +36,8 @@ private:
 	class UStaticMeshComponent* baseMesh;
 
 	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* turretMesh;
-
-	UPROPERTY(VisibleAnywhere)
 	class USceneComponent* projectileSpawnPoint;
 
+	UPROPERTY(EditAnywhere,meta=(AllowPrivateAccess="true"))
+	float rotateRate = 100.0f;
 };

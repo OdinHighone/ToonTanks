@@ -3,6 +3,7 @@
 
 #include "Tank.h"
 
+#include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -25,6 +26,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis(TEXT("Move"),this,&ATank::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"),this,&ATank::Turn);
+	PlayerInputComponent->BindAction(TEXT("Fire"),IE_Pressed,this,&ABasePawn::fire);
 }
 
 void ATank::Move(float Value)
@@ -39,6 +41,25 @@ void ATank::Turn(float Value)
 	FRotator RotationOffset = FRotator::ZeroRotator;
 	RotationOffset.Yaw = turnRate * Value * UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddActorLocalRotation(RotationOffset,true);
+}
+
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	playerControllerReference = Cast<APlayerController>(GetController());
+}
+
+void ATank::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+	FHitResult hitResult;
+
+	if(playerControllerReference)
+	{
+		playerControllerReference->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,true,hitResult);
+		rotateTurret(hitResult.ImpactPoint);
+	}
 }
 
 
