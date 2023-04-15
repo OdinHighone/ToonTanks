@@ -45,7 +45,7 @@ void UHealthComponent::DamageTaken(AActor* DamagedActor, float Damage, const UDa
 	health -= Damage;
 	UE_LOG(LogTemp,Warning,TEXT("Actor %s Health %f"),*DamagedActor->GetName(),health);
 
-	if(health <= 0)
+	if(health <= 0 && tankGameMode)
 	{
 		tankGameMode->onDestruction(DamagedActor);
 	}
