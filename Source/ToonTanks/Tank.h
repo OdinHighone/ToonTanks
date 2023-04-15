@@ -32,7 +32,7 @@ private:
 
 	UPROPERTY(EditAnywhere,meta=(AllowPrivateAccess = "true"))
 	float turnRate = 0;
-
+	
 	class APlayerController* playerControllerReference = nullptr;
 
 protected:
@@ -40,4 +40,9 @@ protected:
 	void Turn(float Value);
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+public:
+	void HandleDestruction();
+
+	APlayerController* getPlayerControllerRef(){ return playerControllerReference;}
 };

@@ -26,6 +26,8 @@ public:
 	UFUNCTION()
 	void onHit(UPrimitiveComponent* HitComp,AActor* OtherActor,UPrimitiveComponent* OtherComp,FVector NormalImpulse,const FHitResult& Hit);
 
+	UPROPERTY(EditAnywhere)
+	float damageAmount = 10.0f;
 protected:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* bulletMesh;
