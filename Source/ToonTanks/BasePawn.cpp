@@ -4,7 +4,6 @@
 #include "BasePawn.h"
 
 #include "DrawDebugHelpers.h"
-#include "NavigationSystemTypes.h"
 #include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"

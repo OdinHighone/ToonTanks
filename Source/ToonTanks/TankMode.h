@@ -21,4 +21,13 @@ private:
 	virtual void BeginPlay() override;
 
 	class ATank* tankPointer = nullptr;
+	class AgamePlayerController* gamePlayerController = nullptr;
+
+	void gameStart();
+
+	float startTime = 5.0f;
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent)
+	void startGameWidget();
 };
