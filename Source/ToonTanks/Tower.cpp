@@ -47,3 +47,9 @@ void ATower::BeginPlay()
 	GetWorldTimerManager().SetTimer(CurrentTimer,this,&ATower::checkFireRange,5.0f,true);
 	playerPointer = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this,0));
 }
+
+void ATower::HandleDestruction()
+{
+	Super::HandleDestruction();
+	Destroy();
+}

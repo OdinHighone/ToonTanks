@@ -54,6 +54,11 @@ void ABasePawn::rotateTurret(FVector destinationPoint)
 
 void ABasePawn::fire()
 {
-	GetWorld()->SpawnActor<AProjectile>(projectile,projectileSpawnPoint->GetComponentLocation(),projectileSpawnPoint->GetComponentRotation());
+	AProjectile* projectileAccess = GetWorld()->SpawnActor<AProjectile>(projectile,projectileSpawnPoint->GetComponentLocation(),projectileSpawnPoint->GetComponentRotation());
+	projectileAccess->SetOwner(this);
 }
 
+void ABasePawn::HandleDestruction()
+{
+	//TODO handle VIsuals and sound
+}

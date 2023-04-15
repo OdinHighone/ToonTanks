@@ -45,4 +45,6 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AProjectile> projectile;
+
+	void HandleDestruction();
 };

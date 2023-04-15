@@ -31,4 +31,6 @@ protected:
 
 public:
 	FTimerHandle CurrentTimer;
+
+	void HandleDestruction();
 };

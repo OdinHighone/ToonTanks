@@ -62,4 +62,9 @@ void ATank::Tick(float DeltaSeconds)
 	}
 }
 
+void ATank::HandleDestruction()
+{
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
 
