@@ -47,4 +47,17 @@ protected:
 	TSubclassOf<class AProjectile> projectile;
 
 	void HandleDestruction();
+
+private:
+	UPROPERTY(EditAnywhere)
+	class UParticleSystem* deathParticle;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* deathSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* launchSound;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UMatineeCameraShake> deathShake;
 };

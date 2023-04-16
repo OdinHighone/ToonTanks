@@ -34,4 +34,16 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	class UProjectileMovementComponent* projectileMovementComponent;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UParticleSystem* onHitParticle;
+
+	UPROPERTY(EditAnywhere)
+	class UParticleSystemComponent* trailParticle;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* hitSound;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UMatineeCameraShake> hitShake;
 };
