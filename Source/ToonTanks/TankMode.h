@@ -27,7 +27,12 @@ private:
 
 	float startTime = 5.0f;
 
+	int32 totalTowers = 0;
+
 protected:
+	UFUNCTION(BlueprintImplementableEvent)
+	void gameOver(bool situation);
+	
 	UFUNCTION(BlueprintImplementableEvent)
 	void startGameWidget();
 };

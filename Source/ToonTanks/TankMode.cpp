@@ -16,11 +16,17 @@ void ATankMode::onDestruction(AActor* DestroyedActor)
 		if(gamePlayerController)
 		{
 			gamePlayerController->setPlayerInputState(false);
+			gameOver(false);
 		}
 	}
 	else if(ATower* towerPointer = Cast<ATower>(DestroyedActor))
 	{
 		towerPointer->HandleDestruction();
+		totalTowers--;
+		if(totalTowers==0)
+		{
+			gameOver(true);
+		}
 	}
 }
 
@@ -28,6 +34,10 @@ void ATankMode::BeginPlay()
 {
 	Super::BeginPlay();
 	gameStart();
+
+	TArray<AActor*> towers;
+	UGameplayStatics::GetAllActorsOfClass(this,ATower::StaticClass(),towers);
+	totalTowers = towers.Num();
 }
 
 void ATankMode::gameStart()
@@ -46,4 +56,3 @@ void ATankMode::gameStart()
 		GetWorldTimerManager().SetTimer(startTimer,timerFunctionHandler,startTime,false);
 	}
 }
-

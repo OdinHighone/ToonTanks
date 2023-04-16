@@ -3,7 +3,9 @@
 
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Camera/CameraShake.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -16,6 +18,9 @@ AProjectile::AProjectile()
 	projectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("movement component"));
 	projectileMovementComponent->InitialSpeed = 1000.f;
 	projectileMovementComponent->MaxSpeed = 1000.f;
+
+	trailParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("trail VFX"));
+	trailParticle->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -41,6 +46,21 @@ void AProjectile::onHit(UPrimitiveComponent* HitComp,AActor* OtherActor,UPrimiti
 	if(OtherActor && OtherActor != myOwner && OtherActor != this)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor,damageAmount,myOwner->GetInstigatorController(),myOwner,UDamageType::StaticClass());
+
+		if(onHitParticle)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(this,onHitParticle,GetActorLocation(),GetActorRotation());
+		}
+
+		if(hitSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this,hitSound,GetActorLocation(),GetActorRotation());
+		}
+
+		if(hitShake)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(hitShake);
+		}
 		Destroy();
 	}
 }
